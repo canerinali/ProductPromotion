@@ -1,0 +1,100 @@
+﻿@model List<FrequentlyQuestions>
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <p class="p-rigth">
+                        <a href="/panel/createsss" class="btn btn-primary" >
+                            <span class="fa fa-edit"> Yeni</span>
+                        </a>
+                    </p>
+                    <table id="example" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model[0].Id)</th>
+                                <th>@Html.DisplayNameFor(model => model[0].Questions)</th>
+                                <th>@Html.DisplayNameFor(model => model[0].Answers)</th>
+                                <th>@Html.DisplayNameFor(model => model[0].ModifiedName)</th>
+                                <th>@Html.DisplayNameFor(model => model[0].CreatedOn)</th>
+                                <th>@Html.DisplayNameFor(model => model[0].ModifiedOn)</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        @foreach (var sss in (List<FrequentlyQuestions>)Model)
+                        {
+                            <tbody>
+
+                                <tr>
+                                    <td>@sss.Id</td>
+                                    <td>@sss.Questions</td>
+                                    <td>@sss.Answers</td>
+                                    <td>@sss.ModifiedName</td>
+                                    <td>@sss.CreatedOn</td>
+                                    <td>@sss.ModifiedOn</td>
+                                    <td class="project-actions text-right">
+                                        <a class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="@("#resultmodal" +sss.Id)" href="@("#resultmodal" +sss.Id)">
+                                            <i class="fas fa-folder">
+                                            </i>
+                                            View
+                                        </a>
+                                        <a class="btn btn-info btn-sm" href="~/panel/sssedit?id=@sss.Id">
+                                            <i class="fas fa-pencil-alt">
+                                            </i>
+                                            Edit
+                                        </a>
+                                        <a class="btn btn-danger btn-sm" href="@Url.Action("DeleteSSS","Admin", new { ID = sss.Id})">
+                                            <i class="fas fa-trash">
+                                            </i>
+                                            Delete
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        }
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+
+@foreach (var category in (List<FrequentlyQuestions>)Model)
+{
+    <div class="modal fade bd-example-modal-lg" id="@("resultmodal" +category.Id)" tabindex="-1" role="dialog" aria-labelledby="instructionsLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Kategori</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body ml-5">
+                    <p>@Html.DisplayNameFor(model => model[0].Questions) : @category.Questions</p>
+                     <p>@Html.DisplayNameFor(model => model[0].Answers) : @Html.Raw(System.Web.HttpUtility.HtmlDecode(category.Answers))
+                    <p>@Html.DisplayNameFor(model => model[0].ModifiedName) : @category.ModifiedName</p>
+                    <p>@Html.DisplayNameFor(model => model[0].CreatedOn) : @category.CreatedOn</p>
+                    <p>@Html.DisplayNameFor(model => model[0].ModifiedOn) : @category.ModifiedOn</p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(function () {
+               $('#example').DataTable({
+                   "paging": true,
+                   "lengthChange": true,
+                   "searching": true,
+                   "ordering": true,
+                   "info": true,
+                   "autoWidth": true,
+               });
+           });
+</script>

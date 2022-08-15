@@ -1,0 +1,102 @@
+﻿@using ProductPromotion.Areas.Admin.Models
+@model ProductViewModel
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <!-- /.card-header -->
+                <div class="card-body" style="">
+                    <table id="example" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model.Product[0].Id)</th>
+                                <th>@Html.DisplayNameFor(model => model.Product[0].Title)</th>
+                                <th>@Html.DisplayNameFor(model => model.Product[0].Text)</th>
+                                <th>@Html.DisplayNameFor(model => model.Product[0].Km)</th>
+                                <th>@Html.DisplayNameFor(model => model.Product[0].CreatedOn)</th>
+                                <th>@Html.DisplayNameFor(model => model.Product[0].Price)</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var product in Model.Product)
+                            {
+                                <tr>
+                                    <td>@product.Id</td>
+                                    <td>@product.Title</td>
+                                    <td>@product.Text</td>
+                                    <td>@product.Km</td>
+                                    <td>@product.CreatedOn</td>
+                                    <td>@product.Price</td>
+                                    <td class="project-actions text-right">
+                                        <a class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="@("#resultmodal" +product.Id)" href="@("#resultmodal" +product.Id)">
+                                            <i class="fas fa-folder">
+                                            </i>
+                                            View
+                                        </a>
+                                        <a class="btn btn-info btn-sm" href="~/panel/productedit?id=@product.Id">
+                                            <i class="fas fa-pencil-alt">
+                                            </i>
+                                            Edit
+                                        </a>
+                                        <a class="btn btn-danger btn-sm" href="@Url.Action("DeleteProduct","Product", new { ID = product.Id})">
+                                            <i class="fas fa-trash">
+                                            </i>
+                                            Delete
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+
+@foreach (var products in Model.Product)
+{
+    <div class="modal fade bd-example-modal-lg" id="@("resultmodal" +products.Id)" tabindex="-1" role="dialog" aria-labelledby="instructionsLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Kategori</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body ml-5">
+
+                    <p>@Html.DisplayNameFor(model => model.Product[0].Title) : @products.Title</p>
+                    <p>@Html.DisplayNameFor(model => model.Product[0].Description) : @products.Description</p>
+                    <p>@Html.DisplayNameFor(model => model.Product[0].ModifiedName) : @products.ModifiedName</p>
+                    <p>@Html.DisplayNameFor(model => model.Product[0].CreatedOn) : @products.CreatedOn</p>
+                    <p>@Html.DisplayNameFor(model => model.Product[0].ModifiedOn) : @products.ModifiedOn</p>
+
+                </div>
+                @foreach (var photo in Model.Photo.Where(x => x.ProductID == products.Id))
+                {
+                    <img src="~/images/@photo.ImageUrl" class="img-profile rounded-bottom" width="200" height="200" />
+                }
+            </div>
+        </div>
+    </div>
+}
+
+
+<script>
+    $(function () {
+        $('#example').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": true,
+        });
+    });
+</script>

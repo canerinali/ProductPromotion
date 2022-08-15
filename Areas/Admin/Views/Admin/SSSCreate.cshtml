@@ -1,0 +1,27 @@
+﻿@model FrequentlyQuestions
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body table-responsive p-2">
+                    <form asp-controller="Admin" asp-action="SSSCreate" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label asp-for="Questions"></label>
+                            <input asp-for="Questions" class="form-control" />
+                            <span asp-validation-for="Questions"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Answers"></label>
+                            <textarea asp-for="Answers" class="form-control"></textarea>
+                            <span asp-validation-for="Answers"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                        <a class="btn btn-danger float-right" asp-action="Index">Geri Dön</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,59 @@
+﻿@model User
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body table-responsive p-2">
+                    <form asp-controller="User" asp-action="UserCreate" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label asp-for="Name"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Surname"></label>
+                            <input asp-for="Surname" class="form-control" />
+                            <span asp-validation-for="Surname"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Username"></label>
+                            <input asp-for="Username" class="form-control" />
+                            <span asp-validation-for="Username"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password"></span>
+                        </div>
+                        <main class="main_full">
+                            <div class="container">
+                                <div class="panel">
+                                    <div class="button_outer">
+                                        <div class="btn_upload">
+                                            <input asp-for="ImageFile" accept="image/*" id="upload_file">
+                                            Upload Image
+                                        </div>
+                                        <div class="processing_bar"></div>
+                                        <div class="success_box"></div>
+                                    </div>
+                                </div>
+                                <div class="error_msg"></div>
+                                <div class="uploaded_file_view" id="uploaded_view">
+                                    <span class="file_remove">X</span>
+                                </div>
+                            </div>
+                        </main>
+                        <button type="submit" class="btn btn-primary float-right">Kaydet</button>
+                        <a class="btn btn-danger " asp-action="Index">Geri Dön</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

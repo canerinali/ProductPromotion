@@ -1,0 +1,21 @@
+﻿@*@model Category
+
+    <div class="modal fade bd-example-modal-lg" id="@("resultmodal" +category.Id)" tabindex="-1" role="dialog" aria-labelledby="instructionsLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Kategori</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body ml-5">
+                    <p>@Html.DisplayNameFor(model => model[0].Title) : @category.Title</p>
+                    <p>@Html.DisplayNameFor(model => model[0].Description) : @category.Description</p>
+                    <p>@Html.DisplayNameFor(model => model[0].ModifiedName) : @category.ModifiedName</p>
+                    <p>@Html.DisplayNameFor(model => model[0].CreatedOn) : @category.CreatedOn</p>
+                    <p>@Html.DisplayNameFor(model => model[0].ModifiedOn) : @category.CreatedOn</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+*@

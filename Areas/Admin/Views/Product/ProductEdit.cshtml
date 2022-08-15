@@ -1,0 +1,103 @@
+﻿@model Product
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body table-responsive p-2">
+                    <form enctype="multipart/form-data" asp-controller="Product" asp-action="ProductEdit" method="post">
+                        <input type="hidden" name="Id" value="@Model.Id" />
+                        <div class="form-group">
+                            <label asp-for="Title"></label>
+                            <input asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Km"></label>
+                            <input asp-for="Km" class="form-control" />
+                            <span asp-validation-for="Km"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DisRenk"></label>
+                            <input asp-for="DisRenk" class="form-control" />
+                            <span asp-validation-for="DisRenk"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="IcRenk"></label>
+                            <input asp-for="IcRenk" class="form-control" />
+                            <span asp-validation-for="IcRenk"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="MotorHacmi"></label>
+                            <input asp-for="MotorHacmi" class="form-control" />
+                            <span asp-validation-for="MotorHacmi"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="BeygirGücü"></label>
+                            <input asp-for="BeygirGücü" class="form-control" />
+                            <span asp-validation-for="BeygirGücü"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CekisTipi"></label>
+                            <input asp-for="CekisTipi" class="form-control" />
+                            <span asp-validation-for="CekisTipi"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="YakıtTipi"></label>
+                            <input asp-for="YakıtTipi" class="form-control" />
+                            <span asp-validation-for="YakıtTipi"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Vites"></label>
+                            <input asp-for="Vites" class="form-control" />
+                            <span asp-validation-for="Vites"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Description"></label>
+                            <input asp-for="Description" class="form-control" />
+                            <span asp-validation-for="Description"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Price"></label>
+                            <input asp-for="Price" class="form-control" />
+                            <span asp-validation-for="Price"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Text"></label>
+                            <input asp-for="Text" class="form-control" />
+                            <span asp-validation-for="Text"></span>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CategoryId, "Kategori")
+                            @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CompanyId, "Firma")
+                            @Html.DropDownList("CompanyId", null, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-10">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    @foreach (var item in (List<Photo>)ViewBag.PhotoId)
+                                    {
+                                        if (item.ProductID == Model.Id)
+                                        {
+                                            <img src="~/images/@item.ImageUrl" class="img-profile rounded-bottom" width="200" height="200" />
+                                            <label><a href="@Url.Action("PhotoDelete","Product", new { ID = item.Id, productId = item.ProductID})">[x]</a></label>
+                                        }
+                                    }
+                                    <input type="file" asp-for="ImagesFile" accept="image/*" multiple class="form-control" /> <br />
+                                    <span class="glyphicon glyphicon-info-sign">&nbsp;</span>
+                                    <span><i>Resim için Lütfen geçerli bir resim formatı kullanın.</i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                        <a class="btn btn-danger float-right" asp-action="Index">Geri Dön</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

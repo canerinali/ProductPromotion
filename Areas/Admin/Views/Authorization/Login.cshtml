@@ -1,0 +1,38 @@
+﻿@model LoginVM
+
+@{
+    ViewData["Title"] = " Giriş Yap";
+    Layout = "_LayoutLogin";
+}
+
+<form class="login100-form validate-form" asp-controller="Authorization" asp-action="Login" method="post">
+    <div class="login100-form-title p-b-100">
+        <h1>Hoş geldiniz</h1>
+    </div>
+    <div class="login100-form-avatar m-b-10">
+        <img src="~/images/mcora2.png" alt="Social Media">
+    </div>
+    <div class="wrap-input100 validate-input m-b-10">
+        <input class="input100" type="text" placeholder="E-Posta" asp-for="Username">
+        <span class="focus-input100"></span>
+        <span class="symbol-input100">
+            <i class="fa fa-user"></i>
+        </span>
+        <span asp-validation-for="Username"></span>
+    </div>
+    <div class="wrap-input100 validate-input m-b-10">
+        <input class="input100" type="password" placeholder="Şifre" asp-for="Password">
+        <span class="focus-input100"></span>
+        <span class="symbol-input100">
+            <i class="fa fa-lock"></i>
+        </span>
+        <span asp-validation-for="Password"></span>
+    </div>
+
+    <div class="container-login100-form-btn p-t-10 p-b-199">
+        <button class="login100-form-btn">
+            Giriş Yap
+        </button>
+    </div>
+    <label class="ab-b-r m-r-10">version 1.0</label>
+</form>

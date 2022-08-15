@@ -1,0 +1,100 @@
+﻿@model List<Home>
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <p class="p-rigth">
+                        <a href="/panel/createhomebanner" class="btn btn-primary" >
+                            <span class="fa fa-edit"> Yeni</span>
+                        </a>
+                    </p>
+                    <table id="example" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>@Html.DisplayNameFor(model => model[0].Id)</th>
+                                <th>@Html.DisplayNameFor(model => model[0].Title)</th>
+                                <th>@Html.DisplayNameFor(model => model[0].Description)</th>
+                                <th>@Html.DisplayNameFor(model => model[0].ModifiedName)</th>
+                                <th>@Html.DisplayNameFor(model => model[0].CreatedOn)</th>
+                                <th>@Html.DisplayNameFor(model => model[0].ModifiedOn)</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        @foreach (var blog in (List<Home>)Model)
+                        {
+                            <tbody>
+
+                                <tr>
+                                    <td>@blog.Id</td>
+                                    <td>@blog.Title</td>
+                                    <td>@blog.Description</td>
+                                    <td>@blog.ModifiedName</td>
+                                    <td>@blog.CreatedOn</td>
+                                    <td>@blog.ModifiedOn</td>
+                                    <td class="project-actions text-right">
+                                        <a class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="@("#resultmodal" +blog.Id)" href="@("#resultmodal" +blog.Id)">
+                                            <i class="fas fa-folder">
+                                            </i>
+                                            View
+                                        </a>
+                                        <a class="btn btn-info btn-sm" href="~/panel/homebanneredit?id=@blog.Id">
+                                            <i class="fas fa-pencil-alt">
+                                            </i>
+                                            Edit
+                                        </a>
+                                        <a class="btn btn-danger btn-sm" href="@Url.Action("DeleteHomeBanner","Admin", new { ID = blog.Id})">
+                                            <i class="fas fa-trash">
+                                            </i>
+                                            Delete
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        }
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+
+@foreach (var category in (List<Home>)Model)
+{
+    <div class="modal fade bd-example-modal-lg" id="@("resultmodal" +category.Id)" tabindex="-1" role="dialog" aria-labelledby="instructionsLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Kategori</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body ml-5">
+                    <p>@Html.DisplayNameFor(model => model[0].Title) : @category.Title</p>
+                     <p>@Html.DisplayNameFor(model => model[0].Description) : @category.Description
+                    <p>@Html.DisplayNameFor(model => model[0].ModifiedName) : @category.ModifiedName</p>
+                    <p>@Html.DisplayNameFor(model => model[0].CreatedOn) : @category.CreatedOn</p>
+                    <p>@Html.DisplayNameFor(model => model[0].ModifiedOn) : @category.ModifiedOn</p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(function () {
+               $('#example').DataTable({
+                   "paging": true,
+                   "lengthChange": true,
+                   "searching": true,
+                   "ordering": true,
+                   "info": true,
+                   "autoWidth": true,
+               });
+           });
+</script>

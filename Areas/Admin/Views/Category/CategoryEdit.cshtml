@@ -1,0 +1,50 @@
+﻿@model Category
+
+<section class="content">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body table-responsive p-2">
+                    <form enctype="multipart/form-data" asp-controller="Category" asp-action="CategoryEdit" method="post">
+                        <input type="hidden" name="Id" value="@Model.Id" />
+                        <div class="form-group">
+                            <label asp-for="Title"></label>
+                            <input asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Description"></label>
+                            <input asp-for="Description" class="form-control" />
+                            <span asp-validation-for="Description"></span>
+                        </div>
+                        <main class="main_full">
+                            <div class="container">
+                                <div class="panel">
+                                    <div class="button_outer">
+                                        <div class="btn_upload">
+
+                                            <input asp-for="ImagesFile" accept="image/*" id="upload_file">
+                                            Upload Image
+                                        </div>
+                                        <div class="processing_bar"></div>
+                                        <div class="success_box"></div>
+                                    </div>
+                                </div>
+                                <div class="error_msg"></div>
+                                <div class="uploaded_file_view" id="uploaded_view">
+                                    <span class="file_remove">X</span>
+                                </div>
+                                <div class="panel">
+                                    <img src="~/images/@Model.CategoryImageFilename" class="img-profile rounded-bottom" width="200" height="200" />
+                                </div>
+                            </div>
+                        </main>
+
+                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                        <a class="btn btn-danger float-right" asp-action="Index">Geri Dön</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
